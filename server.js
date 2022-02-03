@@ -22,6 +22,14 @@ app.get('/', (req, res) => {
     res.send('Haaaaaa');
 })
 
+let store = [];
+app.post('/add', (req, res) => {
+    let arrayMy = req.body;
+    console.log(req.body);
+    store.push(arrayMy);
+    res.json(store);
+})
+
 
 // Setup Server
 app.listen(port, ()=>{
