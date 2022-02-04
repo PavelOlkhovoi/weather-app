@@ -11,22 +11,42 @@ btn.addEventListener('click', function(e){
     let cityZip = getWeather(zip, apiKey)
     .then(data => {
         console.log(data);
-        // Return message with a error or save data and receive all data. 
+        // Return message with a error or save data in server
         return data.message ? console.log('Stop hier', data.message) : postData('/add', 
         {
             feelings: feelings, 
             city: data.name,
             temp: data.main.temp,
             date: newDate
-        }).then(res => console.log(res));
-    });
+        })
+        // Receive the latest data from server side
+        .then(data => {
+            getData('/data')
+            .then(res => console.log(res))
+            .catch(err => console.log('Server Data Error', err));
+        });
+    }).catch(err => console.log('Server Error', err));
 });
+
+/**
+* @description Get request to retrieve the latest data 
+* @param {url} url - Specify addresses on internal server 
+* @returns {object} - Object with the last successful requests
+*/
+const getData = async (url) => {
+    try {
+        const response = await fetch(url);
+        let data = await response.json();
+        return data;
+    }catch(error){
+        console.log(error);
+    }
+}
 
 /**
 * @description Post request to internal server 
 * @param {string} url - Specify addresses on internal server 
 * @param {object} data - Custom object that will send on server
-* @returns {array} - Array with all successful requests
 */
 const postData = async ( url = '', data = {})=>{
     const response = await fetch(url, {
@@ -43,7 +63,7 @@ const postData = async ( url = '', data = {})=>{
       console.log('server Data', newData)
       return newData;
     }catch(error) {
-    console.log("error", error);
+      console.log("error", error);
     }
 };
 
