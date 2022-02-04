@@ -12,7 +12,10 @@ btn.addEventListener('click', function(e){
     .then(data => {
         console.log(data);
         // Return message with a error or save data in server
-        return data.message ? console.log('Stop hier', data.message) : postData('/add', 
+        return data.message ? 
+        // console.log('Stop hier', data.message)
+        document.getElementById('error').innerHTML = `${data.message}. Check you request ${zip}`
+        : postData('/add', 
         {
             feelings: feelings, 
             city: data.name,
@@ -37,6 +40,10 @@ const getData = async (url) => {
     try {
         const response = await fetch(url);
         let data = await response.json();
+        document.getElementById('temp').innerHTML = Math.round(data.temp)+ ' degrees';
+        document.getElementById('content').innerHTML = data.feelings;
+        document.getElementById('date').innerHTML = data.date;
+        document.getElementById('city').innerHTML = data.city;
         return data;
     }catch(error){
         console.log(error);

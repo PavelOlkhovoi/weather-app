@@ -5,9 +5,11 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    /* TODO: current value has been changed for testing */
+    grid-auto-rows: minmax(350px, auto);
+    /* grid-auto-rows: minmax(150px, auto); */
     /* grid-template-columns:  */
-    height:100vh;
+    min-height:100vh;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
