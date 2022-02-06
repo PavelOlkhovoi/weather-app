@@ -3,9 +3,11 @@ const apiKey = '7bf77c277d9236e7bafcb904e1453ce1&units=metric';
 let btn = document.querySelector("#generate");
 
 
+// Event listener click on the button
 btn.addEventListener('click', function(e){
     let errMessage = document.getElementById('error');
     e.preventDefault();
+    // Show message with user's data response
     document.querySelector('.entry').classList.add('active');
         // Accept data from the form
     const {zip, feelings} = getValueFromAllFilds('myInput');
@@ -15,8 +17,9 @@ btn.addEventListener('click', function(e){
         console.log(data);
         // Return message with a error or save data in server
         return data.message ? 
-        // console.log('Stop hier', data.message)
+        // Show error message
         errMessage.innerHTML = `${data.message}. Check you request ${zip}`
+        // Send to server side store all merged data
         : postData('/add', 
         {
             feelings: feelings, 
