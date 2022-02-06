@@ -1,19 +1,20 @@
 body{
-    background: #fffff8;
+    background: #f23557;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 #app{
+    /* padding: 1em 10vh; */
     display: grid;
     /* TODO: current value has been changed for testing */
-    grid-auto-rows: minmax(350px, auto);
-    /* grid-auto-rows: minmax(150px, auto); */
-    /* grid-template-columns:  */
-    min-height:100vh;
+    /* grid-auto-rows: minmax(350px, auto); */
+    grid-auto-rows: minmax(120px, auto);
+    grid-template-columns: minmax(200px, 400px);
+    min-height: 70vh;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
-    grid-gap: 1em;
+    grid-gap: 0.6em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
@@ -22,12 +23,27 @@ body{
 
 }
 
+.holder.headline {
+    margin: 1em 0 1.4em;
+}
+
+.holder.feel {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .entry{
     background: rgba(59, 74, 107, .4);
+    display: none;
 }
 
 #entryHolder{
 
+}
+
+.entry.active {
+    display: block;
 }
 
 #date{
@@ -53,12 +69,14 @@ body{
 label{
     display:block;
     font-size: 27px;
+    margin-bottom: 6px;
 }
 
 input{
     display:block;
+    padding-left: 8px;
     height: 60px;
-    width: 320px;
+    width: calc(100% - 8px);
     background:#22b2da;
     color: #f0d43a;
     font-size: 20px;
@@ -67,8 +85,9 @@ input{
 }
 
 button{
-    width: 400px;
-    height: 100px;
+    margin-top: 1em;
+    width: 100%;
+    min-height: 100px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
@@ -81,10 +100,12 @@ h1{
 }
 
 textarea{
+    padding-left: 8px;
     background:#22b2da;
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    min-height: 200px;
 }
 /* Reset style for HTML element on active to have no border*/
 input:focus,
@@ -111,3 +132,20 @@ button:focus {
     font-family: 'Oswald', sans-serif;
 
 } 
+
+@media(max-width:600px) {
+    #app{
+        grid-auto-rows: minmax(80px, auto);
+        min-height: 100vh;
+        justify-content: center;
+        grid-gap: 1em;
+    }
+
+    textarea{
+        min-height: 160px;
+    }
+
+    button {
+        min-height: 70px;
+    };
+}

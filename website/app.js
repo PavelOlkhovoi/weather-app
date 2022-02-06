@@ -4,7 +4,9 @@ let btn = document.querySelector("#generate");
 
 
 btn.addEventListener('click', function(e){
+    let errMessage = document.getElementById('error');
     e.preventDefault();
+    document.querySelector('.entry').classList.add('active');
         // Accept data from the form
     const {zip, feelings} = getValueFromAllFilds('myInput');
         // Fetch data by zip code
@@ -14,7 +16,7 @@ btn.addEventListener('click', function(e){
         // Return message with a error or save data in server
         return data.message ? 
         // console.log('Stop hier', data.message)
-        document.getElementById('error').innerHTML = `${data.message}. Check you request ${zip}`
+        errMessage.innerHTML = `${data.message}. Check you request ${zip}`
         : postData('/add', 
         {
             feelings: feelings, 
@@ -24,6 +26,7 @@ btn.addEventListener('click', function(e){
         })
         // Receive the latest data from server side
         .then(data => {
+            errMessage.innerHTML = "";
             getData('/data')
             .then(res => console.log(res))
             .catch(err => console.log('Server Data Error', err));
@@ -108,7 +111,6 @@ function getValueFromAllFilds(commonClass){
 
     return inputDataObj;
 }
-
 
 
 // Create a new date instance dynamically with JS
